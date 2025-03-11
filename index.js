@@ -1,8 +1,10 @@
 // Importing required packages
 const express = require('express');
 const cors = require('cors');
-const mongoose = require('mongoose');
+
 const jwt = require('jsonwebtoken');
+const connectDB = require('./api/controllers/connectDB');
+
 require('dotenv').config();
 
 const app = express();
@@ -15,15 +17,8 @@ app.use(express.json());
 // MongoDB Configuration
 const mongoURI = process.env.MONGO_URI;
 
-mongoose.connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-    .then(() => console.log("✅ MongoDB connected successfully"))
-    .catch((error) => {
-        console.error("❌ Error connecting to MongoDB:", error);
-        process.exit(1); // Exit the process on connection error
-    });
+connectDB(mongoURI);
+
 
 // JWT Authentication Endpoint
 app.post('/jwt', (req, res) => {
