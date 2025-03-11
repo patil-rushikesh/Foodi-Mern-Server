@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Configuration
-const mongoURI = process.env.MONGO_URI || "mongodb://localhost:27017";
+const mongoURI = process.env.MONGO_URI;
 
 mongoose.connect(mongoURI, {
     useNewUrlParser: true,
